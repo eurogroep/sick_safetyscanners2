@@ -36,6 +36,7 @@ set(dependencies
 
 add_executable(sick_safetyscanners2_node 
   src/sick_safetyscanners2_node.cpp
+  src/SickSafetyscannersHelper.cpp
   src/SickSafetyscannersRos2.cpp
   src/utils/MessageCreator.cpp)
 
@@ -51,6 +52,7 @@ target_include_directories(sick_safetyscanners2_node PUBLIC
 
   add_executable(sick_safetyscanners2_lifecycle_node 
   src/sick_safetyscanners2_lifecycle_node.cpp
+  src/SickSafetyscannersHelper.cpp
   src/SickSafetyscannersLifeCycle.cpp
   src/utils/MessageCreator.cpp)
 
