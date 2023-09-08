@@ -51,54 +51,35 @@
 
 #include <string>
 
-#include "./SickSafetyscannersHelper.hpp"
+#include "./SickSafetyscanners.hpp"
 
 namespace sick {
 
-class SickSafetyscannersRos2 : public rclcpp::Node
-{
+class SickSafetyscannersRos2 : public rclcpp::Node, public SickSafetyscanners {
 public:
   /*!
-   * \brief Constructor of the ROS2 Node handling the Communication of the Sick Safetyscanner
+   * \brief Constructor of the ROS2 Node handling the Communication of the Sick
+   * Safetyscanner
    */
   SickSafetyscannersRos2();
 
 private:
   // Publishers
-  rclcpp::Publisher<sick_safetyscanners2_interfaces::msg::ExtendedLaserScan>::SharedPtr
-    m_extended_laser_scan_publisher;
-  rclcpp::Publisher<sensor_msgs::msg::LaserScan>::SharedPtr m_laser_scan_publisher;
-  rclcpp::Publisher<sick_safetyscanners2_interfaces::msg::OutputPaths>::SharedPtr
-    m_output_paths_publisher;
-  rclcpp::Publisher<sick_safetyscanners2_interfaces::msg::RawMicroScanData>::SharedPtr
-    m_raw_data_publisher;
+  rclcpp::Publisher<sick_safetyscanners2_interfaces::msg::ExtendedLaserScan>::
+      SharedPtr m_extended_laser_scan_publisher;
+  rclcpp::Publisher<sensor_msgs::msg::LaserScan>::SharedPtr
+      m_laser_scan_publisher;
+  rclcpp::Publisher<sick_safetyscanners2_interfaces::msg::OutputPaths>::
+      SharedPtr m_output_paths_publisher;
+  rclcpp::Publisher<sick_safetyscanners2_interfaces::msg::RawMicroScanData>::
+      SharedPtr m_raw_data_publisher;
 
   // Services
-  rclcpp::Service<sick_safetyscanners2_interfaces::srv::FieldData>::SharedPtr m_field_data_service;
-
-  // Parameters
-  OnSetParametersCallbackHandle::SharedPtr m_param_callback;
-  rcl_interfaces::msg::SetParametersResult
-  parametersCallback(std::vector<rclcpp::Parameter> parameters);
-
-  // Device and Communication
-  std::unique_ptr<sick::AsyncSickSafetyScanner> m_device;
-
-  // Configuration
-  SickSafetyscannersHelper::Config m_config;
-
-  // TODO diagnostics?
-  // TODO dynamic reconfigure?
+  rclcpp::Service<sick_safetyscanners2_interfaces::srv::FieldData>::SharedPtr
+      m_field_data_service;
 
   // Callback function passed to the device for handling the received packages
-  void receiveUDPPaket(const sick::datastructure::Data& data);
-
-  // Methods Triggering COLA2 calls towards the sensor
-  bool getFieldData(
-    const std::shared_ptr<sick_safetyscanners2_interfaces::srv::FieldData::Request> request,
-    std::shared_ptr<sick_safetyscanners2_interfaces::srv::FieldData::Response> response);
-  void readPersistentConfig();
-  void readTypeCodeSettings();
+  void receiveUDPPaket(const sick::datastructure::Data &data);
 };
 } // namespace sick
 
