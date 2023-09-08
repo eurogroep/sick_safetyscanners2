@@ -44,14 +44,22 @@
 #include <string>
 
 namespace sick {
-
 class SickSafetyscanners {
 public:
+  /**
+   * Sick safety scanners base class that implements the shared functionality
+   * between the Node (Ros2) and LifCycle node (LifeCycle)
+   *
+   * @param logger Node log instance
+   */
   explicit SickSafetyscanners(const rclcpp::Logger &logger);
 
 protected:
   const rclcpp::Logger &m_logger;
 
+  /**
+   * Sick safety scanner configuration
+   */
   struct Config {
     void setupMsgCreator() {
       m_msg_creator = std::make_unique<sick::MessageCreator>(
@@ -81,10 +89,17 @@ protected:
     std::unique_ptr<sick::MessageCreator> m_msg_creator;
   };
 
-  // Configuration
   Config m_config;
 
-  // Parameters
+  /**
+   * Initialize parameters for this node
+   *
+   * This method is a template function because the node and lifecycle node
+   * are not sharing the same implementation but have the same interface.
+   *
+   * @tparam NodeT Templated node input
+   * @param node Node
+   */
   template <typename NodeT> static void initializeParameters(NodeT &node) {
     node.template declare_parameter<std::string>("frame_id", "scan");
     node.template declare_parameter<std::string>("sensor_ip", "192.168.1.11");
@@ -106,6 +121,15 @@ protected:
     node.template declare_parameter<float>("min_intensities", 0.f);
   }
 
+  /**
+   * Load the initial parameters
+   *
+   * This method is a template function because the node and lifecycle node
+   * are not sharing the same implementation but have the same interface.
+   *
+   * @tparam NodeT Templated node input
+   * @param node Node
+   */
   template <typename NodeT> void loadParameters(NodeT &node) {
     node.template get_parameter<std::string>("frame_id", m_config.m_frame_id);
     RCLCPP_INFO(m_logger, "frame_id: %s", m_config.m_frame_id.c_str());
@@ -222,11 +246,21 @@ protected:
   // Device and Communication
   std::unique_ptr<sick::AsyncSickSafetyScanner> m_device;
 
+  /**
+   * Setup the device communication
+   * @param callback Callback that fires when a new UDP packet is received
+   */
   void setupCommunication(
       std::function<void(const sick::datastructure::Data &)> callback);
 
+  /**
+   * Start the sensor communication by receiving UDP packets
+   */
   void startCommunication();
 
+  /**
+   * Stop the sensor communication
+   */
   void stopCommunication();
 
   // Methods Triggering COLA2 calls towards the sensor
