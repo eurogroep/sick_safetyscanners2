@@ -33,33 +33,34 @@
 #pragma once
 
 #include <sick_safetyscanners_base/SickSafetyscanners.h>
-#include <sick_safetyscanners_base/Types.h>
-#include <sick_safetyscanners_base/datastructure/Data.h>
 
-#include <sick_safetyscanners2_interfaces/msg/extended_laser_scan.hpp>
-#include <sick_safetyscanners2_interfaces/msg/output_paths.hpp>
 #include <sick_safetyscanners2_interfaces/srv/field_data.hpp>
 
 #include <sick_safetyscanners2/utils/Conversions.h>
 #include <sick_safetyscanners2/utils/MessageCreator.h>
 
 #include <rclcpp/rclcpp.hpp>
-#include <sensor_msgs/msg/laser_scan.hpp>
 
 #include <string>
 
 namespace sick {
 
-class SickSafetyscannersHelper : public rclcpp::Node
+class SickSafetyscannersHelper
 {
 public:
   struct Config
   {
+    void setupMsgCreator()
+    {
+      m_msg_creator = std::make_unique<sick::MessageCreator>(
+          m_frame_id, m_time_offset, m_range_min, m_range_max, m_angle_offset, m_min_intensities);
+    }
+
     boost::asio::ip::address_v4 m_sensor_ip;
     boost::asio::ip::address_v4 m_interface_ip;
     std::string m_frame_id;
-    double m_time_offset;
-    double m_range_min;
+    double m_time_offset = 0.0;
+    double m_range_min = 0.0;
     double m_range_max;
     double m_frequency_tolerance      = 0.1;
     double m_expected_frequency       = 20.0;
@@ -67,8 +68,10 @@ public:
     double m_timestamp_max_acceptable = 1.0;
     double m_min_intensities          = 0.0; /*!< min intensities for laser points */
     bool m_use_sick_angles;
-    float m_angle_offset;
-    bool m_use_pers_conf;
+    float m_angle_offset = -90.0;
+    bool m_use_pers_conf = false;
+
+    sick::types::port_t m_tcp_port = 2122;
 
     sick::datastructure::CommSettings m_communications_settings;
 
