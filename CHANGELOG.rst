@@ -1,6 +1,13 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package sick_safetyscanners2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Forthcoming
+-----------
+* feat(diagnostics): diagnosed scan publisher
+* refactor: combine Node and LifeCycle node implementations
+  Also added ros2 clang format file to auto format code.
+* Contributors: Rein Appeldoorn
 
 1.0.3 (2021-12-22)
 ------------------
