@@ -2,8 +2,8 @@
 Changelog for package sick_safetyscanners2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.0.0 (2023-09-13)
+------------------
 * feat(diagnostics): diagnosed scan publisher
 * refactor: combine Node and LifeCycle node implementations
   Also added ros2 clang format file to auto format code.
