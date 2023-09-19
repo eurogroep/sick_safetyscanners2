@@ -2,6 +2,11 @@
 Changelog for package sick_safetyscanners2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix: version char
+* Contributors: Rein Appeldoorn
+
 2.0.0 (2023-09-13)
 ------------------
 * feat(diagnostics): diagnosed scan publisher
