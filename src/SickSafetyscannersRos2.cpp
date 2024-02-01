@@ -96,6 +96,11 @@ void SickSafetyscannersRos2::receiveUDPPaket(
     auto output_paths = m_config.m_msg_creator->createOutputPathsMsg(data);
     m_output_paths_publisher->publish(output_paths);
   }
+  else{
+    RCLCPP_DEBUG(get_logger(), "No scan data. Measurement data is %s and Derived Values is %s",
+      (data.getMeasurementDataPtr()->isEmpty()) ? "empty" : "not empty",
+      (data.getDerivedValuesPtr()->isEmpty()) ? "empty" : "not empty");
+  }
 
   m_last_raw_msg = m_config.m_msg_creator->createRawDataMsg(data);
   m_raw_data_publisher->publish(m_last_raw_msg);
