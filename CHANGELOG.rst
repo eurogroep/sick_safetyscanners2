@@ -2,8 +2,8 @@
 Changelog for package sick_safetyscanners2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.1.0 (2024-03-27)
+------------------
 * Merge branch 'change/8-char-checksums' into lowpad
 * change(diagnostics): checksums 8 char long
   In order to align the checksum string with the Sick safety designer.
