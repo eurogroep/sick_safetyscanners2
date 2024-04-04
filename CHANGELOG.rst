@@ -2,6 +2,13 @@
 Changelog for package sick_safetyscanners2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge pull request `#2 <https://github.com/eurogroep/sick_safetyscanners2/issues/2>`_ from eurogroep/change/downgrade-contamination-error
+  change: Downgrade contamination error to warning and remove warning
+* Downgrade contamination error to warning and remove warning
+* Contributors: Berend Kupers, berend-kupers
+
 2.1.0 (2024-03-27)
 ------------------
 * Merge branch 'change/8-char-checksums' into lowpad
