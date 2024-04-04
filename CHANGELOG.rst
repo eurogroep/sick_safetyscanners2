@@ -2,8 +2,8 @@
 Changelog for package sick_safetyscanners2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.1.1 (2024-04-04)
+------------------
 * Merge pull request `#2 <https://github.com/eurogroep/sick_safetyscanners2/issues/2>`_ from eurogroep/change/downgrade-contamination-error
   change: Downgrade contamination error to warning and remove warning
 * Downgrade contamination error to warning and remove warning
