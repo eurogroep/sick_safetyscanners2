@@ -221,9 +221,6 @@ void SickSafetyscanners::sensorDiagnostics(
     diagnostic_status.summary(diagnostic_msgs::msg::DiagnosticStatus::ERROR,
                               "Application error");
   } else if (state.contamination_error) {
-    diagnostic_status.summary(diagnostic_msgs::msg::DiagnosticStatus::ERROR,
-                              "Contamination error");
-  } else if (state.contamination_warning) {
     diagnostic_status.summary(diagnostic_msgs::msg::DiagnosticStatus::WARN,
                               "Contamination warning");
   } else {
