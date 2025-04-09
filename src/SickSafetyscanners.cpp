@@ -221,15 +221,15 @@ void SickSafetyscanners::sensorDiagnostics(
 
   for (const auto& [key, value] : contamination_detection_diagnostics.getContaminationStatusMap()) {
     diagnostic_status.addf("contamination percentage sector " + std::to_string(key), "%u", value.pollution_percentage);
-    if (value.status == sick::datastructure::ContaminationDetectionDiagnostics::PollutionDetectedLevel::OK)
+    if (value.status == sick::datastructure::ContaminationDetectionDiagnostics::ContaminationStatus::PollutionDetectedLevel::OK)
     {
       diagnostic_status.add("contamination level sector " + std::to_string(key), "OK");
     }
-    else if (value.status == sick::datastructure::ContaminationDetectionDiagnostics::PollutionDetectedLevel::WARN)
+    else if (value.status == sick::datastructure::ContaminationDetectionDiagnostics::ContaminationStatus::PollutionDetectedLevel::WARNING)
     {
       diagnostic_status.add("contamination level sector " + std::to_string(key), "WARN");
     }
-    else if (value.status == sick::datastructure::ContaminationDetectionDiagnostics::PollutionDetectedLevel::ERROR)
+    else if (value.status == sick::datastructure::ContaminationDetectionDiagnostics::ContaminationStatus::PollutionDetectedLevel::ERROR)
     {
       diagnostic_status.add("contamination level sector " + std::to_string(key), "ERROR");
     }
