@@ -160,6 +160,10 @@ void SickSafetyscanners::sensorDiagnostics(
     diagnostic_updater::DiagnosticStatusWrapper &diagnostic_status) {
   const sick_safetyscanners2_interfaces::msg::DataHeader &header =
       m_last_raw_msg.header;
+
+  sick::datastructure::ContaminationDetectionDiagnostics contamination_detection_diagnostics;
+  readContaminationDetectionDiagnostics(contamination_detection_diagnostics);
+
   if (header.timestamp_time == 0 && header.timestamp_date == 0) {
     diagnostic_status.summary(diagnostic_msgs::msg::DiagnosticStatus::STALE,
                               "Could not get sensor state");
@@ -213,6 +217,11 @@ void SickSafetyscanners::sensorDiagnostics(
   diagnostic_status.add("Application error",
                         boolToString(state.application_error));
   diagnostic_status.add("Device error", boolToString(state.device_error));
+  diagnostic_status.add("contamination measurement running", boolToString(contamination_detection_diagnostics.getEProcessingState()));
+
+  for (const auto& [key, value] : contamination_detection_diagnostics.getContaminationStatusMap()) {
+    diagnostic_status.add("contamination percentage sector " + std::to_string(key), value.pollution_percentage);
+  }
 
   if (state.device_error) {
     diagnostic_status.summary(diagnostic_msgs::msg::DiagnosticStatus::ERROR,
@@ -310,5 +319,11 @@ void SickSafetyscanners::readMetadata() {
 void SickSafetyscanners::readFirmwareVersion() {
   RCLCPP_INFO(getLogger(), "Reading firmware version");
   m_device->requestFirmwareVersion(m_config.m_firmware_version);
+}
+
+void SickSafetyscanners::readContaminationDetectionDiagnostics(sick::datastructure::ContaminationDetectionDiagnostics& contamination_detection_diagnostics)
+{
+  RCLCPP_DEBUG(getLogger(), "Reading contamination detection diagnostics");
+  m_device->requestContaminationDetectionDiagnostics(contamination_detection_diagnostics);
 }
 } // namespace sick
