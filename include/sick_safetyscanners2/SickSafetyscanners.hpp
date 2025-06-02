@@ -342,6 +342,7 @@ public:
   void readTypeCodeSettings();
   void readMetadata();
   void readFirmwareVersion();
+  void readContaminationDetectionDiagnostics(sick::datastructure::ContaminationDetectionDiagnostics& contamination_detection_diagnostics);
 
 private:
   rclcpp::Logger getLogger() {
