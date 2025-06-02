@@ -2,6 +2,11 @@
 Changelog for package sick_safetyscanners2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.2.0 (2025-06-02)
+------------------
+- Build: Remove unused deps (#4) [Yannick de Hoop]
+- Feat: contamination diagnostics (#3) [Yannick de Hoop]
+
 1.0.4 (2024-09-24)
 ------------------
 * possible fix for out of range
